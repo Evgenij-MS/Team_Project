@@ -1,85 +1,19 @@
-import os
+
 import project_1
 import project_2
+import project_3
+import project_4
+import project_5
+import project_6
 
-
-project_1.a()
-project_2.b()
-
-
-class TaskTracker():
-    def __init__(self):
-        self.all_tasks = []
-        if os.path.isfile("tasks.txt"):
-            with open("tasks.txt", "r") as file:
-                for s in file.readlines():
-                    f = s.split(sep=":")
-                    self.add_task(f[0], f[1])
-        else:
-            self.all_tasks = []
-
-    def add_task(self, name, deadline):
-        task = Task(name, deadline)
-        id = 0
-        for t in self.all_tasks:
-            if t.id >= id:
-                id = t.id
-        task.id = id+1
-
-        if not task in self.all_tasks:
-            self.all_tasks.append(task)
-        else:
-            print("Задача уже существует!")
-
-
-    def show_tasks(self):
-        for t in self.all_tasks:
-            print(t)
-
-
-    def del_task(self):
-        number = input("Введите номер задачи, которую нужно удалить:")
-        i = int(number)
-        for n,t in enumerate(self.all_tasks):
-            if i == t.id:
-                del self.all_tasks[n]
-                break
-            else :
-                raise ValueError("Задачи с таким номером не существует!")
-        return number
-
-    def save_tasks(self):
-        with open("tasks.txt", "w") as file:
-            for t in self.all_tasks:
-                file.write(t.name + ":" + t.deadline + "\n")
-
-
-
-class Task():
-    def __init__(self, name, deadline):
-
-        self.id = 0
-        if isinstance(name, str):
-            self.name = name
-
-        else:
-            raise TypeError("Имя должно быть строкой !")
-        if isinstance(deadline, str):  #возможно нужно сделать тип datetime
-            self.deadline = deadline
-        else:
-            raise TypeError("Срок должен быть строкой !")
-
-    def __str__(self):
-        return f"{self.name}     дедлайн: {self.deadline}     номер:{self.id}"
+import TaskTracker
+import Task
 
 
 def main():
+    global TaskTracker
     task_tracker = TaskTracker()
-    # user = input("Введите номер пользователя:")
-    # if user == "1":
-    #     task_traker1 = TaskTracker()
-    # elif user == "2":
-    #     task_tracker2 = TaskTracker()
+
     while True:
         print("\nМеню:")
         print("1. Добавить задачу")
@@ -90,32 +24,25 @@ def main():
         print("6. Посмотреть срок выполнения задач")
         print("7. Завершить работу")
 
-
-
         choice = input("Выберите действие: ")
 
         if choice == "1":
-            print("Добавление задачи...")
-            name = input("Введите имя задачи:")
-            deadline = input("Введите срок выполнения задачи:")
-            task_tracker.add_task(name, deadline)
+            task_tracker_top = project_1.Add_task(task_tracker)
 
         elif choice == "2":
-            print("Удаление задачи")
-            task_tracker.del_task()
-            print(f"Вы удалили задачу под номером {task_tracker.de}")
+            project_2.Delete_task(task_tracker)
+
         elif choice == "3":
-            print("Изменение статуса задачи")
+            project_3.Change_task_status(task_tracker)
 
         elif choice == "4":
-            print("Вывод всех задач...")
-            task_tracker.show_tasks()
+            project_4.View_all_tasks(task_tracker)
 
         elif choice == "5":
-            print("Вывод статуса задач")
+            project_5.View_task_status(task_tracker)
 
         elif choice == "6":
-            print("Вывод сроков выполнения задач")
+            project_6.View_task_deadlines(task_tracker)
 
         elif choice == "7":
             print("Завершение работы")

@@ -1,5 +1,7 @@
 # " Загрузка списка задач из файла и фиксация этого файла в файл настроек"
 
-def b():
-    print("Hallo")
-    pass
+def Delete_task(task_tracker):
+    print("Удаление задачи")
+    print()
+    task_tracker.del_task(task_tracker)
+    print(f"Вы удалили задачу под номером {task_tracker.de}")
