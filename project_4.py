@@ -1,5 +1,8 @@
-# "Вынести отдельно файл настроек"
+# "Вывод всех задач"
+
+import TaskTracker # File
 
 def View_all_tasks(task_tracker):
     print("\nВывод всех задач...")
-    task_tracker.show_tasks()
+    tracker = TaskTracker.TaskTracker()
+    tracker.show_tasks()

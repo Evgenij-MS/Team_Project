@@ -10,7 +10,6 @@ import TaskTracker
 
 
 def main():
-    task_tracker = TaskTracker
 
     while True:
         print("\nМеню:")
@@ -25,22 +24,22 @@ def main():
         choice = input("Выберите действие: ")
 
         if choice == "1":
-            task_tracker_top = project_1.Add_task(task_tracker)
+            project_1.Add_task()
 
         elif choice == "2":
-            project_2.Delete_task(task_tracker)
+            project_2.Delete_task()
 
         elif choice == "3":
-            project_3.Change_task_status(task_tracker)
+            project_3.Change_task_status(TaskTracker)
 
         elif choice == "4":
-            project_4.View_all_tasks(task_tracker)
+            project_4.View_all_tasks(TaskTracker.TaskTracker.show_tasks(TaskTracker.TaskTracker.__call__()))
 
         elif choice == "5":
-            project_5.View_task_status(task_tracker)
+            project_5.View_task_status(TaskTracker)
 
         elif choice == "6":
-            project_6.View_task_deadlines(task_tracker)
+            project_6.View_task_deadlines(TaskTracker)
 
         elif choice == "7":
             project_7.App_exit()

@@ -4,8 +4,9 @@ import Task
 class TaskTracker:
     def __init__(self):
         self.all_tasks = []
-        if os.path.isfile("tasks.txt"):
-            with open("tasks.txt", "r") as file:
+
+        if os.path.isfile("tasks.json"):
+            with open("tasks.json", "r") as file:
                 for s in file.readlines():
                     f = s.split(sep=":")
                     self.add_task(f[0], f[1])
@@ -13,7 +14,8 @@ class TaskTracker:
             self.all_tasks = []
 
     def add_task(self, name, deadline):
-        task = Task(name, deadline)
+        print(name, deadline, self.all_tasks)
+        task = Task.Task(name, deadline)
         id = 0
         for t in self.all_tasks:
             if t.id >= id:
@@ -22,11 +24,13 @@ class TaskTracker:
 
         if not task in self.all_tasks:
             self.all_tasks.append(task)
+            print(self.all_tasks)
         else:
             print("Задача уже существует!")
 
 
     def show_tasks(self):
+        print(Task.Task.__str__(self))
         for t in self.all_tasks:
             print(t)
 
@@ -43,7 +47,7 @@ class TaskTracker:
         return number
 
     def save_tasks(self):
-        with open("tasks.txt", "w") as file:
+        with open("tasks.json", "w") as file:
             for t in self.all_tasks:
                 file.write(t.name + ":" + t.deadline + "\n")
 
