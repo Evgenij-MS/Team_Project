@@ -8,7 +8,7 @@ class TaskTracker:
         if os.path.isfile("tasks.json"):
             with open("tasks.json", "r") as file:
                 for s in file.readlines():
-                    f = s.split(sep=":")
+                    f = s.strip().split(sep=":")
                     self.add_task(f[0], f[1])
         else:
             self.all_tasks = []
@@ -20,9 +20,9 @@ class TaskTracker:
         for t in self.all_tasks:
             if t.id >= id:
                 id = t.id
-        task.id = id+1
+        task.id = id + 1
 
-        if not task in self.all_tasks:
+        if task not in self.all_tasks:
             self.all_tasks.append(task)
             print(self.all_tasks)
         else:
@@ -30,7 +30,6 @@ class TaskTracker:
 
 
     def show_tasks(self):
-        print(Task.Task.__str__(self))
         for t in self.all_tasks:
             print(t)
 
@@ -38,16 +37,16 @@ class TaskTracker:
     def del_task(self):
         number = input("Введите номер задачи, которую нужно удалить:")
         i = int(number)
-        for n,t in enumerate(self.all_tasks):
+        for n, t in enumerate(self.all_tasks):
             if i == t.id:
                 del self.all_tasks[n]
                 break
-            else :
-                raise ValueError("Задачи с таким номером не существует!")
+        else :
+            raise ValueError("Задачи с таким номером не существует!")
         return number
 
     def save_tasks(self):
         with open("tasks.json", "w") as file:
             for t in self.all_tasks:
-                file.write(t.name + ":" + t.deadline + "\n")
+                file.write(f"{t.name}:{t.deadline.strftime('%d.%m.%Y')}\n")
 

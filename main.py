@@ -7,9 +7,10 @@ import project_6
 import project_7
 
 import TaskTracker
-
+import json
 
 def main():
+    tracker = TaskTracker.TaskTracker()
 
     while True:
         print("\nМеню:")
@@ -24,10 +25,13 @@ def main():
         choice = input("Выберите действие: ")
 
         if choice == "1":
-            project_1.Add_task()
+            project_1.Add_task(tracker)
+            tracker.save_tasks()
 
         elif choice == "2":
-            project_2.Delete_task()
+            project_2.Delete_task(tracker)
+            tracker.save_tasks()
+
 
         elif choice == "3":
             project_3.Change_task_status(TaskTracker)
