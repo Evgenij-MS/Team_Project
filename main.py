@@ -73,19 +73,6 @@ class Task():
         return f"{self.name}     дедлайн: {self.deadline}     номер:{self.id}"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 def main():
     task_tracker = TaskTracker()
     # user = input("Введите номер пользователя:")
