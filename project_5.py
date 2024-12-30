@@ -1,5 +1,5 @@
 # "Вынести отдельно файл настроек"
 
 def View_task_status(task_tracker):
-    print("Вывод статуса задач")
-    pass
+    print("\nВывод статуса задач")
+    return task_tracker

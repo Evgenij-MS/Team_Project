@@ -1,18 +1,16 @@
-
 import project_1
 import project_2
 import project_3
 import project_4
 import project_5
 import project_6
+import project_7
 
 import TaskTracker
-import Task
 
 
 def main():
-    global TaskTracker
-    task_tracker = TaskTracker()
+    task_tracker = TaskTracker
 
     while True:
         print("\nМеню:")
@@ -45,9 +43,7 @@ def main():
             project_6.View_task_deadlines(task_tracker)
 
         elif choice == "7":
-            print("Завершение работы")
-            task_tracker.save_tasks()
-            break
+            project_7.App_exit()
 
 
 if __name__ == "__main__":

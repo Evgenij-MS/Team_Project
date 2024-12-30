@@ -1,7 +1,7 @@
-# "Вынести отдельно файл настроек"
+# "Внести отдельно файл настроек"
 
 def Add_task(task_tracker):
-    print("Добавление задачи...")
+    print("\nДобавление задачи...")
     name = input("Введите имя задачи:")
     deadline = input("Введите срок выполнения задачи:")
     task_tracker.add_task(name, deadline)

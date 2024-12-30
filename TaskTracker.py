@@ -1,7 +1,6 @@
 import os
 import Task
 
-
 class TaskTracker:
     def __init__(self):
         self.all_tasks = []
@@ -14,7 +13,6 @@ class TaskTracker:
             self.all_tasks = []
 
     def add_task(self, name, deadline):
-        global Task
         task = Task(name, deadline)
         id = 0
         for t in self.all_tasks:
