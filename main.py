@@ -1,140 +1,73 @@
-import os
-import project_1
-import project_2
+import project_1 #файл содержит функции для добавления задач и просмотра задач по исполнителю.
+import project_2 #файл содержит функцию для удаления задач
+import project_3 #файл содержит функцию для изменения статуса задач
+import project_4 #файл содержит функцию для отображения всех задач
+import project_5 #файл содержит функцию для отображения задач по статусу
+import project_6 #айл содержит функцию для отображения сроков выполнения задач
+import project_7 #файл содержит функцию для завершения работы приложения
 
+import TaskTracker
+import json
 
-project_1.a()
-project_2.b()
+def load_config():
+    with open('config.json', 'r') as file:
+        return json.load(file)
 
-
-class TaskTracker():
-    def __init__(self):
-        self.all_tasks = []
-        if os.path.isfile("tasks.txt"):
-            with open("tasks.txt", "r") as file:
-                for s in file.readlines():
-                    f = s.split(sep=":")
-                    self.add_task(f[0], f[1])
-        else:
-            self.all_tasks = []
-
-    def add_task(self, name, deadline):
-        task = Task(name, deadline)
-        id = 0
-        for t in self.all_tasks:
-            if t.id >= id:
-                id = t.id
-        task.id = id+1
-
-        if not task in self.all_tasks:
-            self.all_tasks.append(task)
-        else:
-            print("Задача уже существует!")
-
-
-    def show_tasks(self):
-        for t in self.all_tasks:
-            print(t)
-
-
-    def del_task(self):
-        number = input("Введите номер задачи, которую нужно удалить:")
-        i = int(number)
-        for n,t in enumerate(self.all_tasks):
-            if i == t.id:
-                del self.all_tasks[n]
-                break
-            else :
-                raise ValueError("Задачи с таким номером не существует!")
-        return number
-
-    def save_tasks(self):
-        with open("tasks.txt", "w") as file:
-            for t in self.all_tasks:
-                file.write(t.name + ":" + t.deadline + "\n")
-
-
-
-class Task():
-    def __init__(self, name, deadline):
-
-        self.id = 0
-        if isinstance(name, str):
-            self.name = name
-
-        else:
-            raise TypeError("Имя должно быть строкой !")
-        if isinstance(deadline, str):  #возможно нужно сделать тип datetime
-            self.deadline = deadline
-        else:
-            raise TypeError("Срок должен быть строкой !")
-
-    def __str__(self):
-        return f"{self.name}     дедлайн: {self.deadline}     номер:{self.id}"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def save_config(config):
+    with open('config.json', 'w') as file:
+        json.dump(config, file)
 
 def main():
-    task_tracker = TaskTracker()
-    # user = input("Введите номер пользователя:")
-    # if user == "1":
-    #     task_traker1 = TaskTracker()
-    # elif user == "2":
-    #     task_tracker2 = TaskTracker()
+    config = load_config()
+    tracker = TaskTracker.TaskTracker(config)
+
     while True:
         print("\nМеню:")
         print("1. Добавить задачу")
         print("2. Удалить задачу")
-        print("3. Изменить статус задачи")  #выполнено/не выполнено/в процессе
+        print("3. Изменить статус задачи")  # выполнено/не выполнено/в процессе
         print("4. Посмотреть все задачи")
         print("5. Посмотреть статус задач")
         print("6. Посмотреть срок выполнения задач")
-        print("7. Завершить работу")
-
-
+        print("7. Показать/скрыть выполненные задания")
+        print("8. Посмотреть задачи по исполнителю")
+        print("9. Завершить работу")
 
         choice = input("Выберите действие: ")
 
         if choice == "1":
-            print("Добавление задачи...")
-            name = input("Введите имя задачи:")
-            deadline = input("Введите срок выполнения задачи:")
-            task_tracker.add_task(name, deadline)
+            project_1.add_task(tracker)
+            tracker.save_tasks()
 
         elif choice == "2":
-            print("Удаление задачи")
-            task_tracker.del_task()
-            print(f"Вы удалили задачу под номером {task_tracker.de}")
+            project_2.delete_task(tracker)
+            tracker.save_tasks()
+
         elif choice == "3":
-            print("Изменение статуса задачи")
+            project_3.change_task_status(tracker)
+            tracker.save_tasks()
 
         elif choice == "4":
-            print("Вывод всех задач...")
-            task_tracker.show_tasks()
+            project_4.view_all_tasks(tracker)
 
         elif choice == "5":
-            print("Вывод статуса задач")
+            project_5.view_task_status(tracker)
 
         elif choice == "6":
-            print("Вывод сроков выполнения задач")
+            project_6.view_task_deadlines(tracker)
 
         elif choice == "7":
-            print("Завершение работы")
-            task_tracker.save_tasks()
-            break
+            tracker.toggle_show_completed()
+            tracker.save_tasks()
 
+        elif choice == "8":
+            project_1.view_tasks_by_assignee(tracker)
+
+        elif choice == "9":
+            project_7.app_exit()
+            break
+        else:
+            print("Неверный выбор. Пожалуйста, выберите опцию от 1 до 9.")
 
 if __name__ == "__main__":
     main()
