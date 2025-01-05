@@ -6,5 +6,41 @@
         "status": "Open",
         "due_date": "2025-06-01",
         "assignee": "Olga"
+    },
+    {
+        "id": 1,
+        "title": "Arbeit",
+        "description": "arbeit",
+        "status": "In Progress",
+        "due_date": "2025-01-04",
+        "assignee": "Olga",
+        "progress": 20
+    },
+    {
+        "id": 2,
+        "title": "Kurs",
+        "description": "Python",
+        "status": "Open",
+        "due_date": "2025-06-20",
+        "assignee": "Olha",
+        "progress": 0
+    },
+    {
+        "id": 3,
+        "title": "Urlaub",
+        "description": "broniren",
+        "status": "Open",
+        "due_date": "2025-06-20",
+        "assignee": "David",
+        "progress": 0
+    },
+    {
+        "id": 4,
+        "title": "TaskTracker ",
+        "description": "optimisiren",
+        "status": "Open",
+        "due_date": "2025-01-05",
+        "assignee": "Evgenij",
+        "progress": 0
     }
 ]
